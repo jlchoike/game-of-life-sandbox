@@ -1,6 +1,6 @@
 package gol.groovy
 
-class Cell {
+public class Cell {
 
     private int row;
     private int column;
@@ -13,28 +13,56 @@ class Cell {
         this.state = state;
     }
 
-    def nextGeneration(Cell[] neighbors) {
+    public Cell nextGeneration(Cell[] neighbors) {
 
-        return new Cell(row, column, POPULATED);
+        return new Cell(this.row, this.column, this.state.determineNextState(neighbors)) 
     }
 
-    def getRow() {
+    public int getRow() {
 
         return this.row
     }
 
-    def getColumn() {
+    public int getColumn() {
 
         return this.column
     }
     
-    def getState() {
+    public State getState() {
 
         return this.state
     }
 
     enum State {
 
-        POPULATED, UNPOPULATED
+        POPULATED {
+
+            public State determineNextState(Cell[] cells) {
+
+                int neighborCount = countdNeighbors(cells)
+                if (neighborCount <= 1) { return UNPOPULATED} 
+                if (neighborCount >= 4) { return UNPOPULATED}
+                return POPULATED
+            }
+        }, 
+        UNPOPULATED {
+            public State determineNextState(Cell[] cells) {
+
+                return countdNeighbors(cells) == 3 ? POPULATED : UNPOPULATED     
+            }
+        }
+
+        private static int countdNeighbors(Cell[] cells) {
+
+            int count = 0;
+            cells.each{
+
+                if (State.POPULATED == it.getState()) { count++ }
+            }
+
+            return count
+        }
+
+        public abstract State determineNextState(Cell[] cells);
     }
 }
