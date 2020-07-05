@@ -14,16 +14,16 @@ class Grid {
         return this.cells
     }
 
-    def List<Cell> getNeighborCells(int row, int column) {
+    def getNeighborCells(int row, int column) {
 
+        def neighbors = []
         if (this.cells.length <= row || this.cells[row].length <= column) {
 
             throw new ArrayIndexOutOfBoundsException()
 
         } else {
 
-            
-
+            return neighbors
         }
     }
 

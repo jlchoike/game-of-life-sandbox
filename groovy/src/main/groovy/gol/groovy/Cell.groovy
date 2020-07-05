@@ -13,22 +13,22 @@ public class Cell {
         this.state = state;
     }
 
-    public Cell nextGeneration(Cell[] neighbors) {
+    def nextGeneration(Cell[] neighbors) {
 
         return new Cell(this.row, this.column, this.state.determineNextState(neighbors)) 
     }
 
-    public int getRow() {
+    def getRow() {
 
         return this.row
     }
 
-    public int getColumn() {
+    def getColumn() {
 
         return this.column
     }
     
-    public State getState() {
+    def getState() {
 
         return this.state
     }
