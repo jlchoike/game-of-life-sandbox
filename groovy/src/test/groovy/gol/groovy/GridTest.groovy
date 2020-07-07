@@ -50,10 +50,11 @@ class GridTest extends Specification {
         thrown(ArrayIndexOutOfBoundsException)   
     }
 
-    def "Grid gets neighbors of upper left corner cell, in row-wise order"() {
-        //      0   1
-        //  0   C   N
-        //  1   N   N
+    def "Grid gets neighbors of top left corner cell, in row-wise order"() {
+        //      0   1   2
+        //  0   C   N   X
+        //  1   N   N   X
+        //  2   X   X   X
         def rowCount = 3
         def columnCount = 3
         def seed = new Random()
@@ -66,22 +67,40 @@ class GridTest extends Specification {
         then:
         // neighbors = {(0,1), (1,0), (1,1)}
         assert neighbors.size() == 3
-                
+        assert neighbors[0].getRow() == 0 && neighbors[0].getColumn() == 1
+        assert neighbors[1].getRow() == 1 && neighbors[1].getColumn() == 0 
+        assert neighbors[2].getRow() == 1 && neighbors[2].getColumn() == 1                
     }
 
-    def "Grid gets neighbors of upper right corner cell, in row-wise order"() {
-        //      0   1
-        //  0   N   C
-        //  1   N   N
+    def "Grid gets neighbors of top right corner cell, in row-wise order"() {
+        //      0   1   2
+        //  0   X   N   C
+        //  1   X   N   N
+        //  2   X   X   X
+        def rowCount = 3
+        def columnCount = 3
+        def seed = new Random()
+        seed.setSeed(0)
+        def grid = Grid.newInstance(rowCount, columnCount, seed)
+
+        when:
+        List<Cell> neighbors = grid.getNeighborCells(0, 2)
+
+        then:
+        // neighbors = {(0,1), (1,0), (1,1)}
+        assert neighbors.size() == 3
+        assert neighbors[0].getRow() == 0 && neighbors[0].getColumn() == 1
+        assert neighbors[1].getRow() == 1 && neighbors[1].getColumn() == 1 
+        assert neighbors[2].getRow() == 1 && neighbors[2].getColumn() == 2        
     }
 
-    def "Grid gets neighbors of lower left corner cell, in row-wise order"() {
+    def "Grid gets neighbors of bottom left corner cell, in row-wise order"() {
         //      0   1
         //  0   N   N
         //  1   C   N
     }
 
-    def "Grid gets neighbors of lower right corner cell, in row-wise order"() {
+    def "Grid gets neighbors of bottom right corner cell, in row-wise order"() {
         //      0   1
         //  0   N   N
         //  1   N   C        
