@@ -14,6 +14,22 @@ class Grid {
         return this.cells
     }
 
+    def update() {
+
+        def nextGeneration = new Cell[this.cells.length][this.cells[0].length]
+        
+        for (int gridRow = 0; gridRow < this.cells.length; gridRow++) {
+
+            for (int gridColumn = 0; gridColumn < this.cells[gridRow].length; gridColumn++) {
+                    
+                 def cell = this.cells[gridRow][gridColumn]
+                 nextGeneration[gridRow][gridColumn] = cell.nextGeneration(this.getNeighborCells(cell.row, cell.column))
+            }
+        }
+
+        this.cells = nextGeneration
+    }
+
     def getNeighborCells(int cellRow, int cellColumn) {
 
         def neighbors = []
