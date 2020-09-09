@@ -8,29 +8,29 @@ class App {
     static void main(String[] args) {
 
         def seed = new Random()
-        seed.setSeed(0)
+        seed.setSeed(System.currentTimeMillis())
         def grid = Grid.newInstance(10, 10, seed)
 
-        int generations = 3
-        StringBuilder display = new StringBuilder()
-        def cells = grid.cells
-
-        for (int g = 0; g < generations; g++) 
-
+        int generations = 10
+        for (int g = 0; g < generations; g++) {
+            def cells = grid.cells
+            StringBuilder display = new StringBuilder()
             System.out.println("Generation " + g)
-        
-            for (int gridRow = 0; gridRow < cells.length; gridRow++) {
-
-                for (int gridColumn = 0; gridColumn < cells[gridRow].length; gridColumn++) {
-
-                    display.append(cells[gridRow][gridColumn].getState()).append("\t")
-                }
-
-                display.append("\n")
-            }
-       
-            System.out.println(display.toString())
-
+            System.out.println(generateGrid(cells, display))
             grid.update()
         }
     }
+
+    private static String generateGrid(Cell[][] cells, StringBuilder display) {
+        for (int gridRow = 0; gridRow < cells.length; gridRow++) {
+
+            for (int gridColumn = 0; gridColumn < cells[gridRow].length; gridColumn++) {
+
+                display.append(cells[gridRow][gridColumn].getState().getStateCode()).append("\t")
+            }
+            display.append("\n")
+        }
+
+        return display.toString();
+    }
+}

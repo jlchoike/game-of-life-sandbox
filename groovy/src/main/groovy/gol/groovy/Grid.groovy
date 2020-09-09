@@ -8,7 +8,7 @@ class Grid {
 
         this.cells = cells;
     }
-    
+
     def getCells() {
 
         return this.cells
@@ -17,13 +17,14 @@ class Grid {
     def update() {
 
         def nextGeneration = new Cell[this.cells.length][this.cells[0].length]
-        
+
         for (int gridRow = 0; gridRow < this.cells.length; gridRow++) {
 
             for (int gridColumn = 0; gridColumn < this.cells[gridRow].length; gridColumn++) {
-                    
-                 def cell = this.cells[gridRow][gridColumn]
-                 nextGeneration[gridRow][gridColumn] = cell.nextGeneration(this.getNeighborCells(cell.row, cell.column))
+
+                def cell = this.cells[gridRow][gridColumn]
+                def descendent = cell.nextGeneration(this.getNeighborCells(cell.row, cell.column))
+                nextGeneration[gridRow][gridColumn] = descendent
             }
         }
 
@@ -46,7 +47,7 @@ class Grid {
                     if (isNeighbor(cellRow, cellColumn, gridRow, gridColumn)) {
 
                         neighbors << this.cells[gridRow][gridColumn]
-                    } 
+                    }
                 }
             }
 
@@ -66,7 +67,7 @@ class Grid {
             }
         }
 
-        return new Grid(cells) 
+        return new Grid(cells)
     }
 
     private static def determineInitialState(Random seed, int bound) {
@@ -76,15 +77,33 @@ class Grid {
 
     private static def isNeighbor(int cellRow, int cellColumn, int gridRow, int gridColumn) {
 
-        if (isSpecifiedCell(cellRow, cellColumn, gridRow, gridColumn)) { return false }
-        if (isTopLeftNeighbor(cellRow, cellColumn, gridRow, gridColumn)) { return true }
-        if (isTopNeighbor(cellRow, cellColumn, gridRow, gridColumn)) { return true }
-        if (isTopRightNeighbor(cellRow, cellColumn, gridRow, gridColumn)) { return true }
-        if (isLeftNeighbor(cellRow, cellColumn, gridRow, gridColumn)) { return true }
-        if (isRightNeighbor(cellRow, cellColumn, gridRow, gridColumn)) { return true }
-        if (isBottomLeftNeighbor(cellRow, cellColumn, gridRow, gridColumn)) { return true }
-        if (isBottomNeighbor(cellRow, cellColumn, gridRow, gridColumn)) { return true }
-        if (isBottomRightNeighbor(cellRow, cellColumn, gridRow, gridColumn)) { return true }
+        if (isSpecifiedCell(cellRow, cellColumn, gridRow, gridColumn)) {
+            return false
+        }
+        if (isTopLeftNeighbor(cellRow, cellColumn, gridRow, gridColumn)) {
+            return true
+        }
+        if (isTopNeighbor(cellRow, cellColumn, gridRow, gridColumn)) {
+            return true
+        }
+        if (isTopRightNeighbor(cellRow, cellColumn, gridRow, gridColumn)) {
+            return true
+        }
+        if (isLeftNeighbor(cellRow, cellColumn, gridRow, gridColumn)) {
+            return true
+        }
+        if (isRightNeighbor(cellRow, cellColumn, gridRow, gridColumn)) {
+            return true
+        }
+        if (isBottomLeftNeighbor(cellRow, cellColumn, gridRow, gridColumn)) {
+            return true
+        }
+        if (isBottomNeighbor(cellRow, cellColumn, gridRow, gridColumn)) {
+            return true
+        }
+        if (isBottomRightNeighbor(cellRow, cellColumn, gridRow, gridColumn)) {
+            return true
+        }
 
         return false
     }
@@ -97,40 +116,40 @@ class Grid {
     private static def isTopLeftNeighbor(int cellRow, int cellColumn, int gridRow, int gridColumn) {
 
         return ((gridRow + 1) == cellRow) && ((gridColumn + 1) == cellColumn)
-    }    
+    }
 
     private static def isTopNeighbor(int cellRow, int cellColumn, int gridRow, int gridColumn) {
 
         return ((gridRow + 1) == cellRow) && (gridColumn == cellColumn)
-    }    
+    }
 
     private static def isTopRightNeighbor(int cellRow, int cellColumn, int gridRow, int gridColumn) {
 
         return ((gridRow + 1) == cellRow) && ((gridColumn - 1) == cellColumn)
-    }    
+    }
 
     private static def isLeftNeighbor(int cellRow, int cellColumn, int gridRow, int gridColumn) {
 
         return (gridRow == cellRow) && ((gridColumn + 1) == cellColumn)
-    }    
+    }
 
     private static def isRightNeighbor(int cellRow, int cellColumn, int gridRow, int gridColumn) {
 
         return (gridRow == cellRow) && ((gridColumn - 1) == cellColumn)
-    }    
+    }
 
     private static def isBottomLeftNeighbor(int cellRow, int cellColumn, int gridRow, int gridColumn) {
 
         return ((gridRow - 1) == cellRow) && ((gridColumn + 1) == cellColumn)
-    }    
+    }
 
     private static def isBottomNeighbor(int cellRow, int cellColumn, int gridRow, int gridColumn) {
 
         return ((gridRow - 1) == cellRow) && (gridColumn == cellColumn)
-    }    
+    }
 
     private static def isBottomRightNeighbor(int cellRow, int cellColumn, int gridRow, int gridColumn) {
 
         return ((gridRow - 1) == cellRow) && ((gridColumn - 1) == cellColumn)
-    } 
+    }
 }

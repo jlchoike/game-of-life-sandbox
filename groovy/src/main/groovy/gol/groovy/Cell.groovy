@@ -13,7 +13,7 @@ public class Cell {
         this.state = state;
     }
 
-    def nextGeneration(Cell[] neighbors) {
+    def nextGeneration(List<Cell> neighbors) {
 
         return new Cell(this.row, this.column, this.state.determineNextState(neighbors)) 
     }
@@ -35,9 +35,9 @@ public class Cell {
 
     enum State {
 
-        POPULATED {
+        POPULATED("P") {
 
-            public State determineNextState(Cell[] cells) {
+            public State determineNextState(List<Cell> cells) {
 
                 int neighborCount = countdNeighbors(cells)
                 if (neighborCount <= 1) { return UNPOPULATED} 
@@ -45,14 +45,26 @@ public class Cell {
                 return POPULATED
             }
         }, 
-        UNPOPULATED {
-            public State determineNextState(Cell[] cells) {
+        UNPOPULATED(" ") {
+            public State determineNextState(List<Cell> cells) {
 
                 return countdNeighbors(cells) == 3 ? POPULATED : UNPOPULATED     
             }
         }
 
-        private static int countdNeighbors(Cell[] cells) {
+        State(final String stateCode) {
+
+            this.stateCode = stateCode
+        }
+
+        private String stateCode;
+
+        public getStateCode() {
+
+            return this.stateCode;
+        }
+
+        private static int countdNeighbors(List<Cell> cells) {
 
             int count = 0;
             cells.each{
@@ -63,6 +75,6 @@ public class Cell {
             return count
         }
 
-        public abstract State determineNextState(Cell[] cells);
+        public abstract State determineNextState(List<Cell> cells);
     }
 }
