@@ -14,16 +14,15 @@ class App {
         int generations = 10
         for (int g = 0; g < generations; g++) {
             def cells = grid.cells
-            StringBuilder display = new StringBuilder()
             System.out.println("Generation " + g)
-            System.out.println(generateGrid(cells, display))
+            System.out.println(generateGrid(cells))
             grid.update()
         }
     }
 
-    private static String generateGrid(Cell[][] cells, StringBuilder display) {
+    private static String generateGrid(Cell[][] cells) {
+        StringBuilder display = new StringBuilder();
         for (int gridRow = 0; gridRow < cells.length; gridRow++) {
-
             for (int gridColumn = 0; gridColumn < cells[gridRow].length; gridColumn++) {
 
                 display.append(cells[gridRow][gridColumn].getState().getStateCode()).append("\t")
