@@ -9,7 +9,7 @@ class CellTest extends Specification {
         //      0   1
         //  0   S   P
         //  1   P   P
-        Cell[] neighbors = [new Cell(0, 1, Cell.State.POPULATED),
+        def neighbors = [new Cell(0, 1, Cell.State.POPULATED),
             new Cell(1, 1, Cell.State.POPULATED),
             new Cell(1, 0, Cell.State.POPULATED)]
 
@@ -29,7 +29,7 @@ class CellTest extends Specification {
         //      0   1
         //  0   S   U
         //  1   U   U
-        Cell[] neighbors = [new Cell(0, 1, Cell.State.UNPOPULATED),
+        def neighbors = [new Cell(0, 1, Cell.State.UNPOPULATED),
             new Cell(1, 1, Cell.State.UNPOPULATED),
             new Cell(1, 0, Cell.State.UNPOPULATED)]
 
@@ -49,7 +49,7 @@ class CellTest extends Specification {
         //      0   1
         //  0   S   U
         //  1   U   U
-        Cell[] neighbors = [new Cell(0, 1, Cell.State.UNPOPULATED),
+        def neighbors = [new Cell(0, 1, Cell.State.UNPOPULATED),
             new Cell(1, 1, Cell.State.UNPOPULATED),
             new Cell(1, 0, Cell.State.UNPOPULATED)]
 
@@ -69,7 +69,7 @@ class CellTest extends Specification {
         //      0   1
         //  0   S   P
         //  1   U   U
-        Cell[] neighbors = [new Cell(0, 1, Cell.State.POPULATED),
+        def neighbors = [new Cell(0, 1, Cell.State.POPULATED),
             new Cell(1, 1, Cell.State.UNPOPULATED),
             new Cell(1, 0, Cell.State.UNPOPULATED)]
 
@@ -88,7 +88,7 @@ class CellTest extends Specification {
         //      0   1   2
         //  0   P   S   P
         //  1   U   P   P
-        Cell[] neighbors = [new Cell(0, 0, Cell.State.UNPOPULATED),
+        def neighbors = [new Cell(0, 0, Cell.State.UNPOPULATED),
         new Cell(0, 2, Cell.State.POPULATED),
         new Cell(1, 0, Cell.State.UNPOPULATED),
         new Cell(1, 2, Cell.State.POPULATED),
@@ -112,7 +112,7 @@ class CellTest extends Specification {
         //  0   U   S   P
         //  1   P   S   P
         //  2   P   P   U
-        Cell[] neighbors = [new Cell(0, 0, Cell.State.UNPOPULATED),
+        def neighbors = [new Cell(0, 0, Cell.State.UNPOPULATED),
         new Cell(0, 2, Cell.State.POPULATED),
         new Cell(1, 0, Cell.State.POPULATED),
         new Cell(1, 2, Cell.State.POPULATED),
@@ -135,7 +135,7 @@ class CellTest extends Specification {
         setup:
         // S P
         // P U
-        Cell[] neighbors = [new Cell(0, 1, Cell.State.POPULATED),
+        def neighbors = [new Cell(0, 1, Cell.State.POPULATED),
             new Cell(1, 1, Cell.State.UNPOPULATED),
             new Cell(1, 0, Cell.State.POPULATED)]
 
@@ -154,7 +154,7 @@ class CellTest extends Specification {
         setup:
         // S P
         // P P
-        Cell[] neighbors = [new Cell(0, 1, Cell.State.POPULATED),
+        def neighbors = [new Cell(0, 1, Cell.State.POPULATED),
             new Cell(1, 1, Cell.State.POPULATED),
             new Cell(1, 0, Cell.State.POPULATED)]
 
