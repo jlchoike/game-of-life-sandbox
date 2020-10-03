@@ -12,9 +12,9 @@ class App {
         def grid = Grid.newInstance(10, 10, seed)
 
         int generations = 10
-        for (int g = 0; g < generations; g++) {
+        (0..generations).each {
             def cells = grid.cells
-            System.out.println("Generation " + g)
+            System.out.println("Generation " + generation)
             System.out.println(generateGrid(cells))
             grid.update()
         }
@@ -22,14 +22,13 @@ class App {
 
     private static String generateGrid(Cell[][] cells) {
         StringBuilder display = new StringBuilder();
-        for (int gridRow = 0; gridRow < cells.length; gridRow++) {
-            for (int gridColumn = 0; gridColumn < cells[gridRow].length; gridColumn++) {
 
+        cells.eachWithIndex { Cell[] rowCells, int row ->
+            entry.eachWithIndex { Cell columnCells, int column ->
                 display.append(cells[gridRow][gridColumn].getState().getStateCode()).append("\t")
             }
             display.append("\n")
         }
-
         return display.toString();
     }
 }
