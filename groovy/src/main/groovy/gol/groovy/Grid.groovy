@@ -18,13 +18,12 @@ class Grid {
 
         def nextGeneration = new Cell[this.cells.length][this.cells[0].length]
 
-        for (int gridRow = 0; gridRow < this.cells.length; gridRow++) {
+        nextGeneration.eachWithIndex{ Cell[] generationRows, int row ->
+            generationRows.eachWithIndex{ Cell generationColumn, int column ->
 
-            for (int gridColumn = 0; gridColumn < this.cells[gridRow].length; gridColumn++) {
-
-                def cell = this.cells[gridRow][gridColumn]
+                def cell = this.cells[row][column]
                 def descendent = cell.nextGeneration(this.getNeighborCells(cell.row, cell.column))
-                nextGeneration[gridRow][gridColumn] = descendent
+                nextGeneration[row][column] = descendent
             }
         }
 
@@ -35,17 +34,11 @@ class Grid {
 
         def neighbors = []
         if (this.cells.length <= cellRow || this.cells[cellRow].length <= cellColumn) {
-
             throw new ArrayIndexOutOfBoundsException()
-
         } else {
-
-            for (int gridRow = 0; gridRow < this.cells.length; gridRow++) {
-
-                for (int gridColumn = 0; gridColumn < this.cells[gridRow].length; gridColumn++) {
-
+            this.cells.eachWithIndex{ Cell[] gridRows, int gridRow ->
+                gridRows.eachWithIndex{ Cell gridColumns, int gridColumn ->
                     if (isNeighbor(cellRow, cellColumn, gridRow, gridColumn)) {
-
                         neighbors << this.cells[gridRow][gridColumn]
                     }
                 }
@@ -58,15 +51,12 @@ class Grid {
     static def newInstance(int rows, int columns, Random seed) {
 
         Cell[][] cells = new Cell[rows][columns]
-        for (int row = 0; row < rows; row++) {
 
-            for (int column = 0; column < columns; column++) {
-
-                Cell cell = new Cell(row, column, determineInitialState(seed, (rows * columns)))
-                cells[row][column] = cell
+        cells.eachWithIndex{ Cell[] newRows, int newRow ->
+            newRows.eachWithIndex{ Cell cell, int newColumn ->
+                cells[newRow][newColumn] = new Cell(newRow, newColumn, determineInitialState(seed, (rows * columns)))
             }
         }
-
         return new Grid(cells)
     }
 

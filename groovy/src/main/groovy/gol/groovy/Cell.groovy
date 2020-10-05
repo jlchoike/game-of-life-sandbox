@@ -37,7 +37,7 @@ public class Cell {
 
         POPULATED("P") {
 
-            public State determineNextState(List<Cell> cells) {
+            State determineNextState(List<Cell> cells) {
 
                 int neighborCount = countdNeighbors(cells)
                 if (neighborCount <= 1) { return UNPOPULATED} 
@@ -46,7 +46,7 @@ public class Cell {
             }
         }, 
         UNPOPULATED(" ") {
-            public State determineNextState(List<Cell> cells) {
+            State determineNextState(List<Cell> cells) {
 
                 return countdNeighbors(cells) == 3 ? POPULATED : UNPOPULATED     
             }
@@ -59,7 +59,7 @@ public class Cell {
 
         private String stateCode;
 
-        public getStateCode() {
+        def getStateCode() {
 
             return this.stateCode;
         }
@@ -68,13 +68,12 @@ public class Cell {
 
             int count = 0;
             cells.each{
-
                 if (State.POPULATED == it.getState()) { count++ }
             }
 
             return count
         }
 
-        public abstract State determineNextState(List<Cell> cells);
+        abstract State determineNextState(List<Cell> cells);
     }
 }
